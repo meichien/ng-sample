@@ -1,0 +1,72 @@
+<ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+  <!-- 左側選單triggrt -->
+  <li class="xn-icon-button">
+      <a igxButton="icon" igxToggleAction="navigation" [closeOnOutsideClick]="false">
+        <span class="fa fa-bars"></span>
+      </a>
+  </li>
+
+  <!-- 系統名稱 -->
+  <li class="xn-logo">
+      <a href="home.html">週邊系統範本</a>
+  </li>
+
+  <!-- 登出 -->
+  <li class="xn-icon-button pull-right">
+      <a (click)="open(closeOption)" class="mb-control" title="登出" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
+  </li>
+  <ng-template #closeOption let-closebtn="close">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+            <div class="mb-content">
+                <p>Are you sure you want to log out?</p>
+                <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
+                    <button class="btn btn-default btn-lg mb-control-close" (click)="closebtn()">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </ng-template>
+
+  <!-- 系統跳轉 -->
+  <li *ngIf="userInfo.Systems.length > 0" class="xn-icon-button pull-right" [ngbPopover]="gotoSystem" placement="bottom" popoverTitle="系統跳轉">
+      <a title="系統跳轉">
+        <span class="fa fa-mail-forward"></span>
+      </a>
+  </li>
+  <ng-template #gotoSystem>
+      <div class="list-group">
+        <ng-container *ngFor="let system of userInfo.Systems">
+            <a class="list-group-item" href={{system.Url}}><strong>{{system.Name}}</strong></a>
+        </ng-container>
+    </div>
+  </ng-template>
+
+  <!-- 語系設定 -->
+  <li *ngIf="systemSetting.HasMuitLanguage" class="pull-right" [ngbPopover]="languageSetting" popoverTitle="語系設定" placement="bottom" popoverClass="panel-primary">
+      <a title="語系設定">
+        <span class="fa fa-globe"></span>
+        <span> {{userInfo.LanguageName}} </span>
+      </a>
+  </li>
+  <ng-template #languageSetting>
+    <div class="list-group">
+      <!-- //TODO: 按了不可以跳頁 -->
+        <ng-container *ngFor="let language of languageList">
+            <a class="list-group-item" href="#" *ngIf="language.Name!=userInfo.LanguageName" (click)="changeLanguage(language)">
+                <strong>{{language.Name}}</strong>
+            </a>
+        </ng-container>
+    </div>
+  </ng-template>
+
+  <!-- 使用者資訊 -->
+  <li class="pull-right">
+      <div class="xn-userInfo"><span class="fa fa-user"></span> {{userInfo.EmployeeNo}}-{{userInfo.Name}}</div>
+  </li>
+</ul>

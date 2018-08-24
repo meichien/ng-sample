@@ -1,0 +1,12 @@
+<ul class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Layouts</a></li>
+  <li class="active">Top Navigation Fixed</li>
+  <li *ngFor="let item of breadcrumbList; let i = index"
+      [class.active]="i===breadcrumbList.length-1">
+      <a [routerLink]="item.path" *ngIf="i!==breadcrumbList.length-1">
+        {{ item.name }}
+      </a>
+      <span *ngIf="i===breadcrumbList.length-1">{{ item.name }}</span>
+  </li>
+</ul>
