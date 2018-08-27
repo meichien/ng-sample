@@ -10,7 +10,29 @@
 </head>
 <body>
   <app-root>
-    <div id="loader"><img src="assets/img/loader-preview.svg" alt="loading"></div>
+    <div class="loader"><img src="assets/img/loader.svg" alt="loading"></div>
   </app-root>
+  <!-- 由於此時css尚未載入，因此將style寫於此。app-root載入後就會被取代 -->
+  <style>
+      .loader {
+        position: absolute;
+        display: block;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 1;
+        -webkit-transform: translate3d(0, -50%, 0);
+        -moz-transform: translate3d(0, -50%, 0);
+        -o-transform: translate3d(0, -50%, 0);
+        -ms-transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -50%, 0);
+        text-align: center;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        top: 50%;
+      }
+    </style>
 </body>
 </html>
